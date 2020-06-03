@@ -84,19 +84,28 @@ D_time = D_end - D_start
 
 K_start = time.time()
 K = get_K(s, m)
-K3 = get_Kxy(s, s2, m)
-
 K_end = time.time()
-K_time = K_end - K_end
+K_time = K_end - K_start
 
+Kxy_start = time.time()
+K3 = get_Kxy(s, s2, m)
+Kxy_end = time.time()
+Kxy_time = Kxy_end - Kxy_start
 
 
 print("Час розрахунку мат. очікування: ", m_time)
 print("Час розрахунку дисперсії: ", D_time)
 print("Час розрахунку автокореляції: ", K_time)
+print("Час розрахунку взаємокореляції: ", Kxy_time)
+if K_time > Kxy_time:
+    print("Час розрахунку автокореляції на ", K_time-Kxy_time, "с довше")
+else:
+    print("Час розрахунку взаємокореляції на ", Kxy_time-K_time, "с довше")
+
+
 print("m =", m)
 print("D =", D)
-print("K = ", K)
+# print("K = ", K)
 
 plt.subplot(2, 1, 1)
 plt.plot(range(N), s)
